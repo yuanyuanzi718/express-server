@@ -4,7 +4,6 @@ const JWT = require('../../util/JWT')
 const UserController = {
 
   login: async (req, res) => {
-    console.log(req.body, '111')
     //req.body 
     const result = await UserService.login(req.body)
 
@@ -22,9 +21,27 @@ const UserController = {
       res.header("Authorization", token)
       res.send({
         success: true,
-        data: {}
+        data: {
+          username: result[0].username,
+          gender: result[0].gender ? result[0].gender : 0,
+          introduction: result[0].introduction,
+          avatar: result[0].avatar,
+          role: result[0].role,
+        }
       })
     }
+  },
+
+  upload: async (req, res) => {
+    const { username, introduction, gender, avatar } = req.body
+    const token = req.headers["authorization"].split(" ")[1]
+    var payload = JWT.verify(token)
+    //调用service 模块更新 数据
+    await UserService.upload({ _id: payload._id, username, introduction, gender: gender, avatar })
+    res.send({
+      success: true,
+      data: {}
+    })
   }
 }
 
