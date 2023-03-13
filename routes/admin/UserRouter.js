@@ -8,6 +8,11 @@ const UserController = require('../../controllers/admin/UserController');
 
 UserRouter.post("/adminapi/user/login", UserController.login)
 UserRouter.post("/adminapi/user/upload", UserController.upload)
-// UserRouter.post("/adminapi/user/upload", upload.single('file'), UserController.upload)
+
+UserRouter.get("/adminapi/user/list", UserController.getList)
+UserRouter.post("/adminapi/user/create", UserController.create)
+UserRouter.get("/adminapi/user/detail/:id", UserController.detail)
+UserRouter.put("/adminapi/user/list/:id", UserController.putList)
+UserRouter.delete("/adminapi/user/list/:id", UserController.delList)
 
 module.exports = UserRouter;
