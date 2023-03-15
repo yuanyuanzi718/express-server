@@ -7,6 +7,7 @@ const UserService = {
       password
     })
   },
+
   upload: async ({ _id, username, introduction, gender, avatar }) => {
     return UserModel.updateOne({
       _id
@@ -14,9 +15,11 @@ const UserService = {
       username, introduction, gender, avatar
     })
   },
+
   getList: async () => {
     return UserModel.find({}, ["username", "role", "avatar", "introduction", "gender"])
   },
+
   create: async ({ username, introduction, gender, avatar, password, role }) => {
     return UserModel.create({
       username, introduction, gender, avatar, password, role

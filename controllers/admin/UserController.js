@@ -32,7 +32,7 @@ const UserController = {
     const token = req.headers["authorization"].split(" ")[1]
     var payload = JWT.verify(token)
     //调用service 模块更新 数据
-    await UserService.upload({ _id: payload._id, username, introduction, gender: gender, avatar })
+    await UserService.upload({ _id: payload._id, username, introduction, gender, avatar })
     res.send({
       success: true,
       data: {}
