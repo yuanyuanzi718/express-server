@@ -9,6 +9,8 @@ var usersRouter = require('./routes/users');
 const UserRouter = require('./routes/admin/UserRouter');
 const NewsRouter = require('./routes/admin/NewsRouter');
 const ProductRouter = require('./routes/admin/ProductRouter');
+const WebUserRouter = require('./routes/web/NewsRouter');
+
 const JWT = require('./util/JWT')
 
 var app = express();
@@ -23,10 +25,10 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-/*
-/adminapi 后台
-/webapi 前台
-*/
+// webapi 前台
+app.use(WebUserRouter)
+
+// adminapi 后台
 app.use((req, res, next) => {
   // 如果token有效next(),如果token过期了, 返回401错误
   if (req.url === "/adminapi/user/login") {
